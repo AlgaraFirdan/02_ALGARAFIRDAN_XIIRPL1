@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Laporan Singkat UKKGARA</title>
+<style>
+  body {
+    font-family: "Times New Roman", serif;
+    font-size: 12pt;
+    margin: 24px;
+    color: #111;
+  }
+  h1 {
+    text-align: center;
+    font-size: 16pt;
+    margin: 0 0 16px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th, td {
+    border: 1px solid #333;
+    padding: 8px;
+    vertical-align: top;
+    word-wrap: break-word;
+  }
+  th {
+    background: #bdd7ee;
+    text-align: center;
+    font-weight: bold;
+  }
+  .col-no { width: 8%; text-align: center; }
+  .col-bagian { width: 30%; }
+  .col-uraian { width: 62%; }
+  ol {
+    margin: 0;
+    padding-left: 18px;
+  }
+  li { margin-bottom: 6px; }
+  .meta {
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    padding: 8px;
+  }
+  .meta-row {
+    display: flex;
+    margin-bottom: 4px;
+  }
+  .meta-row span:first-child {
+    width: 90px;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 14pt;
+    margin: 20px 0 10px 0;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="meta-row"><span>Nama</span><span>: Algara Firdan</span></div>
+    <div class="meta-row"><span>Kelas</span><span>: XII RPL 1</span></div>
+  </div>
+
+  <h1>LAPORAN SINGKAT PENGEMBANGAN SISTEM PARKIR</h1>
+
+  <table>
+    <tr>
+      <th class="col-no">No</th>
+      <th class="col-bagian">Bagian</th>
+      <th class="col-uraian">Uraian</th>
+    </tr>
+
+    <tr>
+      <td class="col-no">1</td>
+      <td class="col-bagian"><b>Fitur yang sudah berjalan dengan baik</b></td>
+      <td class="col-uraian">
+        <ol>
+          <li>Autentikasi login/logout sudah aktif, termasuk pembatasan user nonaktif.</li>
+          <li>Otorisasi role sudah konsisten: Admin (master data), Petugas (transaksi), Owner (rekap).</li>
+          <li>Alur transaksi parkir berjalan end-to-end: kendaraan masuk, keluar, dan hitung biaya otomatis.</li>
+          <li>Cetak struk sudah terintegrasi dari halaman Transaksi Keluar (tanpa halaman struk terpisah).</li>
+          <li>Profil dashboard sudah dinamis sesuai user login (nama, role, avatar inisial).</li>
+          <li>Seeder default user dan tarif sudah tersedia.</li>
+          <li>Pengujian role dan endpoint lulus: 13 test, 79 assertions.</li>
+        </ol>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="col-no">2</td>
+      <td class="col-bagian"><b>Bug yang belum diperbaiki</b></td>
+      <td class="col-uraian">
+        <ol>
+          <li>Di beberapa titik, atribut operator transaksi masih berpotensi memakai fallback user pertama.</li>
+          <li>Tampilan mode cetak struk belum dioptimalkan penuh (elemen non-struk masih bisa ikut tercetak).</li>
+          <li>Belum ada fitur export laporan ke PDF/Excel pada modul rekap.</li>
+        </ol>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="col-no">3</td>
+      <td class="col-bagian"><b>Rencana pengembangan berikutnya</b></td>
+      <td class="col-uraian">
+        <ol>
+          <li>Membuat identitas user dinamis di semua halaman (nama, role, dan label profil).</li>
+          <li>Refactor pencatatan aktivitas agar selalu menggunakan user login aktif.</li>
+          <li>Menambahkan CSS khusus <i>@media print</i> agar hanya struk yang tampil saat cetak.</li>
+          <li>Menambah test regresi untuk menu per-role dan alur cetak setelah proses keluar.</li>
+          <li>Memecah layout Blade menjadi komponen reusable agar UI lebih konsisten dan mudah dirawat.</li>
+        </ol>
+      </td>
+    </tr>
+  </table>
+
+  <h2>LAPORAN PENGUJIAN SETIAP FITUR</h2>
+  <table>
+    <tr>
+      <th style="width: 6%;">No</th>
+      <th style="width: 24%;">Fitur</th>
+      <th style="width: 26%;">Skenario Uji</th>
+      <th style="width: 16%;">Hasil Aktual</th>
+      <th style="width: 28%;">Keterangan</th>
+    </tr>
+    <tr>
+      <td style="text-align:center;">1</td>
+      <td>Login &amp; Logout</td>
+      <td>Login user aktif, login user nonaktif, logout sesi.</td>
+      <td>Lulus</td>
+      <td>User aktif bisa login, user nonaktif ditolak, logout mengakhiri sesi.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">2</td>
+      <td>Dashboard</td>
+      <td>Tampilkan statistik, filter transaksi, profil user login.</td>
+      <td>Lulus</td>
+      <td>Data tampil sesuai query dan profil menyesuaikan role user.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">3</td>
+      <td>Manajemen User (Admin)</td>
+      <td>Tambah, ubah, hapus user; validasi input wajib.</td>
+      <td>Lulus</td>
+      <td>CRUD berjalan, validasi error muncul saat data tidak valid.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">4</td>
+      <td>Tarif Parkir (Admin)</td>
+      <td>CRUD tarif aktif/nonaktif per jenis kendaraan.</td>
+      <td>Lulus</td>
+      <td>Tarif aktif dipakai saat transaksi, tarif nonaktif ditolak.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">5</td>
+      <td>Area Parkir (Admin)</td>
+      <td>CRUD area dan kapasitas parkir.</td>
+      <td>Lulus</td>
+      <td>Data area tersimpan dan dapat dipakai pada input kendaraan masuk.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">6</td>
+      <td>Kendaraan (Admin)</td>
+      <td>Tambah, ubah, hapus data kendaraan.</td>
+      <td>Lulus</td>
+      <td>Data kendaraan berhasil dikelola dan relasi transaksi berjalan.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">7</td>
+      <td>Transaksi Masuk (Petugas)</td>
+      <td>Input plat, jenis, area; cek duplikasi parkir aktif.</td>
+      <td>Lulus</td>
+      <td>Input tersimpan; kendaraan yang masih aktif parkir tidak bisa input ulang.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">8</td>
+      <td>Transaksi Keluar &amp; Cetak</td>
+      <td>Cari kendaraan aktif, proses keluar, hitung biaya, cetak struk.</td>
+      <td>Lulus</td>
+      <td>Durasi dibulatkan ke atas, minimum 1 jam, cetak dilakukan dari halaman keluar.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">9</td>
+      <td>Log Aktivitas (Admin)</td>
+      <td>Tampilkan log berdasarkan aktivitas pengguna.</td>
+      <td>Lulus</td>
+      <td>Aktivitas utama tercatat dan bisa ditelusuri.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">10</td>
+      <td>Rekap Laporan (Owner)</td>
+      <td>Filter tanggal dan validasi total transaksi.</td>
+      <td>Lulus</td>
+      <td>Data rekap tampil sesuai rentang tanggal yang dipilih.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">11</td>
+      <td>Hak Akses Role</td>
+      <td>Uji akses halaman &amp; endpoint admin/petugas/owner.</td>
+      <td>Lulus</td>
+      <td>Seluruh pengujian akses berhasil (13 test, 79 assertions).</td>
+    </tr>
+  </table>
+</body>
+</html>
