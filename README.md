@@ -8,6 +8,14 @@ Proyek ini adalah aplikasi manajemen parkir berbasis Laravel untuk kebutuhan UKK
 - Perhitungan tarif otomatis
 - Rekap dan log aktivitas
 
+## Dokumentasi Utama
+
+Folder dokumentasi utama proyek tersedia di:
+
+- [DOKUMENTASI](DOKUMENTASI)
+- [Dokumentasi_Program_UKKGARA.doc](DOKUMENTASI/Dokumentasi_Program_UKKGARA.doc)
+- [Laporan_Singkat_UKKGARA.doc](DOKUMENTASI/Laporan_Singkat_UKKGARA.doc)
+
 ## Ringkasan Fitur
 
 1. Autentikasi
